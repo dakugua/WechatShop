@@ -17,9 +17,10 @@ util.getUrlParams = function(){
   return theRequest;
 };
 util.getContextPath = function(){
-  if(process.env.NODE_ENV !== 'production') return 'http://localhost:8080/shop';
+  return 'http://test.api.catoncar.com/api';
+  /*if(process.env.NODE_ENV !== 'production') return 'http://test.api.catoncar.com/api';
   var url = window.location.href;
-  return url.substring(0, url.indexOf("/mobile") !== -1 ? url.indexOf("/mobile") : '' );
+  return url.substring(0, url.indexOf("/mobile") !== -1 ? url.indexOf("/mobile") : '' );*/
 };
 /*字符串转换为布尔型*/
 util.getBoolean = function (str){

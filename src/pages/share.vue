@@ -52,11 +52,9 @@
       getErweima () {
         let that = this
         that.inloading = true
-        alert(that.id)
-        axios.get(Util.getContextPath()).then(function(response) {
-          that.items = response.data.data
-          that.inloading=false
-          // console.log(that.items)
+        axios.get(Util.getContextPath()+'/v1/activity/merchant/twitter/'+that.id).then(function(response) {
+          that.erweima = response.data.data;
+          // console.log(response.data)
         })
       }
     }
@@ -65,5 +63,5 @@
 <style>
   .nostyle{margin: 0px;padding: 0px;}
   .full{height: 100%;width: 100%;}
-  .erweima{width: 28%;position: absolute;left: 15.2rem;top:46rem;}
+  .erweima{width: 29%;position: absolute;left: 15.2rem;top:46rem;}
 </style>
