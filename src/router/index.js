@@ -62,7 +62,7 @@ export default new Router({
       component:joinYyj
     },
     {
-      path:'/share',
+      path:'/share/:id',
       name:'share',
       component:share
     },
