@@ -57,7 +57,7 @@ export default new Router({
       component:newsDetail
     },
     {
-      path:'/joinyyj',
+      path:'/joinyyj/:id',
       name:'joinYyj',
       component:joinYyj
     },

@@ -5,21 +5,21 @@
       <tr>
         <td class="label"><span class="must">*</span>手机号</td>
         <td class="content">
-          <input class="input" placeholder="请输入手机号"/>
+          <input class="input" placeholder="请输入手机号" v-model="contactMobile"/>
         </td>
       </tr>
 
       <tr>
         <td class="label">E-mail</td>
         <td class="content">
-          <input class="input" placeholder="请输入E-mail"/>
+          <input class="input" placeholder="请输入E-mail" v-model="contactEmail"/>
         </td>
       </tr>
 
       <tr>
         <td class="label"><span class="must">*</span>密码</td>
         <td class="content">
-          <input type="password" class="input" placeholder="请输入密码"/>
+          <input type="password" class="input" placeholder="请输入密码" v-model="password"/>
         </td>
       </tr>
 
@@ -33,48 +33,64 @@
       <tr>
         <td class="label"><span class="must">*</span>法人</td>
         <td class="content">
-          <input class="input" placeholder="请输入法人"/>
+          <input class="input" placeholder="请输入法人" v-model="businessEntity"/>
         </td>
       </tr>
 
       <tr>
+        <td class="label"><span class="must">*</span>联系电话</td>
+        <td class="content">
+          <input class="input" placeholder="请输入联系电话" v-model="contactTel"/>
+        </td>
+      </tr>
+
+
+      <tr>
         <td class="label"><span class="must">*</span>统一社会信用代码</td>
         <td class="content">
-          <input class="input" placeholder="请输入统一社会信用代码"/>
+          <input class="input" placeholder="请输入统一社会信用代码" v-model="businessLicenceCode"/>
         </td>
       </tr>
 
       <tr>
         <td class="label"><span class="must">*</span>企业名称</td>
         <td class="content">
-          <input class="input" placeholder="请输入企业名称"/>
+          <input class="input" placeholder="请输入企业名称" v-model="merchantName"/>
         </td>
       </tr>
 
       <tr>
-        <td class="label"><span class="must">*</span>电话</td>
-        <td class="content">
-          <input class="input" placeholder="请输入电话"/>
+        <td class="label"><span class="must">*</span>营业执照</td>
+        <td class="file">
+          选择文件
+          <!--<input type="button" @click="chooseImg()">-->
+          <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="onFileChange" >
+
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="width: 100%;text-align: center">
+          <img :src="dataUrl" style="width: 30%;" />
         </td>
       </tr>
 
       <tr>
         <td class="label">官方网址</td>
         <td class="content">
-          <input class="input" placeholder="请输入官方网址" />
+          <input class="input" placeholder="请输入官方网址" v-model="website"/>
         </td>
       </tr>
 
       <tr>
         <td class="label">企业简介</td>
         <td class="content">
-          <textarea  class="input" placeholder="请输入企业简介"></textarea>
+          <textarea  class="input" placeholder="请输入企业简介" v-model="merchantIntro"></textarea>
         </td>
       </tr>
 
       <tr>
         <td colspan="2" style="width: 100%;text-align: center">
-          <button class="button" >提交</button>
+          <button class="button" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>
         </td>
       </tr>
     </table>
@@ -82,11 +98,161 @@
 </template>
 <script>
   import axios from 'axios'
+  import Util from '../util/util.js'
+  import wx from 'weixin-js-sdk'
+  import lrz from '../../node_modules/lrz/dist/lrz.bundle.js'
   export default {
       data() {
           return {
+            imgUrls: [],
+            dataUrl:'',
+            id : this.$route.params.id,
+            contactMobile:'',
+            contactEmail:'',
+            contactTel:'',
+            password:'',
+            businessEntity:'',
+            businessLicenceCode:'',
+            merchantName:'',
+            website:'',
+            businessLicence:'',
+            merchantIntro:'',
+            subState:'提交',
+            noSub : false,
             msg: 'Welcome to YYJ'
           }
+      },
+      methods:{
+          uploaddata(){
+            let vm = this;
+            let param = new URLSearchParams();
+            param.append("contactMobile", this.contactMobile);
+            param.append("contactEmail", this.contactEmail);
+            param.append("password", this.password);
+            param.append("businessEntity", this.businessEntity);
+            param.append("contactTel", this.contactTel);
+            param.append("businessLicenceCode", this.businessLicenceCode);
+            param.append("merchantName", this.merchantName);
+            param.append("website", this.website);
+            param.append("businessLicence",this.businessLicence);
+            param.append("merchantIntro", this.merchantIntro);
+
+            axios.post(Util.getContextPath()+'/api/v1/merchant/join/'+this.id,param).then(function(response) {
+//              that.erweima = response.data.data;
+               console.log(response.data)
+              if(response.data.code == 0){
+                vm.noSub = true
+                vm.subState='已提交'
+              }
+            })
+          },
+        chooseImg(){
+          wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+              var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            }
+          });
+        },
+        imgPreview (file) {
+          let self = this;
+          // 看支持不支持FileReader
+          if (!file || !window.FileReader) return;
+
+          if (/^image/.test(file.type)) {
+            // 创建一个reader
+            var reader = new FileReader();
+            // 将图片将转成 base64 格式
+            reader.readAsDataURL(file);
+            // 读取成功后的回调
+            reader.onloadend = function () {
+              self.dataUrl = this.result;
+            }
+          }
+        },
+        onFileChange: function(e) {
+          /*var file = this.files[0]
+          imgPreview(file);*/
+          /*let self = this
+          var file = this.files[0]   //读取文件
+          // 看支持不支持FileReader
+          if (!file || !window.FileReader) return;
+          if (/^image/.test(file.type)) {
+            // 创建一个reader
+            var reader = new FileReader();
+            // 将图片将转成 base64 格式
+            reader.readAsDataURL(file);
+            // 读取成功后的回调
+            reader.onloadend = function () {
+              self.dataUrl = this.result;
+            }
+          }*/
+          /*reader = new FileReader();
+
+          reader.onload = function() {
+            var result = this.result   //result为data url的形式
+              img = new Image()
+              img.src = result;
+
+
+            if(result.length < maxSize) {
+              imgUpload(result);      //图片直接上传
+            } else {
+              var data = compress(img);    //图片首先进行压缩
+              imgUpload(data);                //图片上传
+            }
+          }
+
+          reader.readAsDataURL(file);*/
+
+          var files = e.target.files || e.dataTransfer.files;
+          if(!files.length) return;
+          this.createImage(files, e);
+        },
+        compress(img) {
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          //利用canvas进行绘图
+
+          //将原来图片的质量压缩到原先的0.2倍。
+          var data = canvas.toDataURL('image/jpeg', 0.2); //data url的形式
+          return data;
+        }
+        ,
+        createImage: function(file, e) {
+          let vm = this;
+          lrz(file[0], { width: 480 }).then(function(rst) {
+            vm.imgUrls.push(rst.base64);
+            console.log(vm.imgUrls)
+            vm.dataUrl = rst.base64;
+//            this.upImg();
+            console.log('123123123123');
+            console.log('4444');
+            let fileparam = new URLSearchParams();
+            fileparam.append('file', vm.dataUrl);
+            axios.post(Util.getContextPath()+'/api/v1/upload/base64',fileparam).then(function(response) {
+              console.log(response.data)
+              vm.businessLicence = response.data.data
+            })
+            return rst.base64;
+          }).always(function() {
+            // 清空文件上传控件的值
+            e.target.value = null;
+          });
+        },
+        upImg :function(){
+          console.log('555555555')
+          return ''
+          /*let param = new URLSearchParams();
+          param.append('file', this.dataUrl);
+
+          axios.post(Util.getContextPath()+'/api/v1/upload/base64',param).then(function(response) {
+            console.log(response.data)
+          })*/
+        }
       }
   }
 </script>
@@ -100,4 +266,30 @@
   .content .input{width: 100%;border: solid 1px grey;}
 
   .button{width: 50%;margin: auto;background-color: #4CAF50;border: none;color: white;padding: 1rem;text-align: center;text-decoration: none;display: inline-block;font-size: 1.3rem;}
+  .file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+  }
+  .file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+  }
 </style>

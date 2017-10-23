@@ -52,7 +52,7 @@
       getErweima () {
         let that = this
         that.inloading = true
-        axios.get(Util.getContextPath()+'/v1/activity/merchant/twitter/'+that.id).then(function(response) {
+        axios.get(Util.getContextPath()+'/api/v1/activity/merchant/twitter/'+that.id).then(function(response) {
           that.erweima = response.data.data;
           // console.log(response.data)
         })
