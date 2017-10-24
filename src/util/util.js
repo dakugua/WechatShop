@@ -38,4 +38,14 @@ util.getArray = function (arr, key){
   }
   return returnArr;
 };
+util.checkMobileNum = function(num){
+  if(num.length==0) return false;
+  if(num.length!=11) return false;
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+  if(!myreg.test(num))
+  {
+    return false;
+  }
+  return true;
+}
 export default util;

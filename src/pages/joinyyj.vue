@@ -26,7 +26,7 @@
       <tr>
         <td class="label"><span class="must">*</span>确认密码</td>
         <td class="content">
-          <input type="password" class="input" placeholder="请输入确认密码"/>
+          <input type="password" class="input" placeholder="请输入确认密码" v-model="secondpassword"/>
         </td>
       </tr>
 
@@ -96,11 +96,15 @@
     </table>
 	</div>
 </template>
+
 <script>
   import axios from 'axios'
   import Util from '../util/util.js'
   import wx from 'weixin-js-sdk'
   import lrz from '../../node_modules/lrz/dist/lrz.bundle.js'
+  import PostbirdAlertBox from '../util/js/postbirdAlertBox.js'
+
+
   export default {
       data() {
           return {
@@ -111,6 +115,7 @@
             contactEmail:'',
             contactTel:'',
             password:'',
+            secondpassword:'',
             businessEntity:'',
             businessLicenceCode:'',
             merchantName:'',
@@ -124,6 +129,42 @@
       },
       methods:{
           uploaddata(){
+              if(!Util.checkMobileNum(this.contactMobile)){
+                this.showAlert('请输入有效手机号')
+                return
+              }
+            if(this.password != this.secondpassword){
+              this.showAlert('两次密码输入不一致')
+              return ;
+            }
+              if(this.contactMobile == ''){
+                this.showAlert('请输入手机号')
+                return ;
+              }
+            if(this.password == ''){
+              this.showAlert('请输入密码')
+              return ;
+            }
+            if(this.businessEntity == ''){
+              this.showAlert('请输入法人')
+              return ;
+            }
+            if(!Util.checkMobileNum(this.contactTel)){
+              this.showAlert('请输入有效联系电话')
+              return
+            }
+            if(this.contactTel == ''){
+              this.showAlert('请输入联系电话')
+              return ;
+            }
+            if(this.merchantName == ''){
+              this.showAlert('请输入企业名称')
+              return ;
+            }
+            if(this.businessLicence == ''){
+              this.showAlert('请上传营业执照')
+              return ;
+            }
             let vm = this;
             let param = new URLSearchParams();
             param.append("contactMobile", this.contactMobile);
@@ -153,6 +194,17 @@
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function (res) {
               var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            }
+          });
+        },
+        showAlert(msg) {
+          PostbirdAlertBox.alert({
+            'title': '提示',
+            'content': msg,
+            'okBtn': '确认',
+            'contentColor': 'green',
+            'onConfirm': function () {
+
             }
           });
         },
@@ -256,7 +308,8 @@
       }
   }
 </script>
-<style>
+<style lang="css">
+  @import "../assets/css/postbirdAlertBox.css";
   table{width: 100%;margin-top: 3rem;}
   .nomargin{margin: 0px;padding: 0px;}
   .label{width: 35%;text-align: right;font-size: 1.3rem;padding-right:15px;padding-top: 5px;padding-bottom: 5px; }

@@ -10,7 +10,8 @@ export default {
   name: 'app'
 }
 </script>
-
+<!--<style src="./assets/css/bootstrap.min.css" lang="sass"></style>
+<style src="./assets/css/postbirdAlertBox.css" lang="sass"></style>-->
 <style>
   html{
     font-size: 62.5%;
