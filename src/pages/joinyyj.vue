@@ -184,7 +184,7 @@
                 vm.noSub = true
                 vm.subState='已提交'
               }else{
-                this.showAlert(response.data.msg)
+                vm.showAlert(response.data.msg)
               }
             })
           },
