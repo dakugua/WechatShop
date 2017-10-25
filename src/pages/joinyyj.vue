@@ -65,12 +65,11 @@
           选择文件
           <!--<input type="button" @click="chooseImg()">-->
           <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="onFileChange" >
-
         </td>
       </tr>
       <tr>
         <td colspan="2" style="width: 100%;text-align: center">
-          <img :src="dataUrl" style="width: 30%;" />
+          <img :src="dataUrl" class="joinyyj_img" style="width: 30%;" v-if="dataUrl"/>
         </td>
       </tr>
 
@@ -90,7 +89,7 @@
 
       <tr>
         <td colspan="2" style="width: 100%;text-align: center">
-          <button class="button" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>
+          <button class="joinbutton" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>
         </td>
       </tr>
     </table>
@@ -184,6 +183,8 @@
               if(response.data.code == 0){
                 vm.noSub = true
                 vm.subState='已提交'
+              }else{
+                this.showAlert(response.data.msg)
               }
             })
           },
@@ -285,9 +286,20 @@
             console.log('4444');
             let fileparam = new URLSearchParams();
             fileparam.append('file', vm.dataUrl);
+            if(rst.base64 != ''){
+              vm.noSub = true
+              vm.subState='正在上传图片'
+            }
+
             axios.post(Util.getContextPath()+'/api/v1/upload/base64',fileparam).then(function(response) {
               console.log(response.data)
               vm.businessLicence = response.data.data
+              if(response.data.code != '0'){
+                this.showAlert('上传失败，请重新上传')
+                vm.businessLicence = '';
+              }
+              vm.noSub = false
+              vm.subState='提交'
             })
             return rst.base64;
           }).always(function() {
@@ -318,7 +330,9 @@
 
   .content .input{width: 100%;border: solid 1px grey;}
 
-  .button{width: 50%;margin: auto;background-color: #4CAF50;border: none;color: white;padding: 1rem;text-align: center;text-decoration: none;display: inline-block;font-size: 1.3rem;}
+  .joinyyj_img{width: 30%;border-radius: 0.3rem;}
+
+  .joinbutton{width: 50%;margin: auto;background-color: #4CAF50;border: none;color: white;padding: 1rem;text-align: center;text-decoration: none;display: inline-block;font-size: 1.3rem;}
   .file {
     position: relative;
     display: inline-block;
@@ -331,6 +345,7 @@
     text-decoration: none;
     text-indent: 0;
     line-height: 20px;
+    width: 80%;
   }
   .file input {
     position: absolute;
