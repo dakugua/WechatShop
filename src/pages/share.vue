@@ -2,7 +2,7 @@
 <!--首页-->
 	<div class="nostyle full" style="text-align: center;">
     <img id="bg_img" :src="shareimg" class="nostyle full" >
-    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.18 + 'px',left:screenWidth*0.326 + 'px' }">
+    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">
 	</div>
 </template>
 <script>
@@ -16,7 +16,7 @@
             fullHeight: document.documentElement.clientHeight,
             userid : Util.getUrlParam('id') || '',
             id : this.$route.params.id,
-            shareimg: require('../assets/img/2017101901.jpg'),
+            shareimg: require('../assets/img/2017101901.png'),
             erweima: require('../assets/img/1508642585.png')
 
           }
