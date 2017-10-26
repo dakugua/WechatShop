@@ -2,7 +2,7 @@
 <!--首页-->
 	<div class="nostyle full" style="text-align: center;">
     <img id="bg_img" :src="shareimg" class="nostyle full" >
-    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.08 + 'px',left:screenWidth*0.36 + 'px' }">
+    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.18 + 'px',left:screenWidth*0.326 + 'px' }">
 	</div>
 </template>
 <script>
@@ -63,5 +63,5 @@
 <style>
   .nostyle{margin: 0px;padding: 0px;}
   .full{height: 100%;width: 100%;}
-  .erweima{width: 29%;position: absolute;left: 15.2rem;top:46rem;}
+  .erweima{width: 35%;position: absolute;left: 15rem;top:50rem;}
 </style>
