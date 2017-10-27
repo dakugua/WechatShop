@@ -10,7 +10,7 @@
       </tr>
 
       <tr>
-        <td class="label">E-mail</td>
+        <td class="label"><span class="must">*</span>E-mail</td>
         <td class="content">
           <input class="input" placeholder="请输入E-mail" v-model="contactEmail"/>
         </td>
@@ -144,10 +144,10 @@
               this.showAlert('请输入密码')
               return ;
             }
-//            if(this.contactEmail == ''){
-//              this.showAlert('请输入邮箱')
-//              return ;
-//            }
+            if(this.contactEmail == ''){
+              this.showAlert('请输入邮箱')
+              return ;
+            }
             if(this.businessEntity == ''){
               this.showAlert('请输入法人')
               return ;
@@ -173,7 +173,7 @@
 //              this.showAlert('请输入企业简介')
 //              return ;
 //            }
-//            if(this.businessLicence == ''){ 
+//            if(this.businessLicence == ''){
 //              this.showAlert('请上传营业执照')
 //              return ;
 //            }
@@ -196,7 +196,7 @@
               if(response.data.code == 0){
                 vm.noSub = true
                 vm.subState='已提交'
-                this.showAlert('提交成功')
+                vm.showAlert('提交成功')
               }else{
                 vm.showAlert(response.data.msg)
               }
