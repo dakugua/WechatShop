@@ -1,8 +1,9 @@
 <template>
 <!--首页-->
 	<div class="nostyle full" style="text-align: center;">
-    <img id="bg_img" :src="shareimg" class="nostyle full" >
-    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">
+    <!--<img id="bg_img" :src="shareimg" class="nostyle full" >
+    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">-->
+    <canvas id="canvas"></canvas>
 	</div>
 </template>
 <script>
@@ -18,7 +19,6 @@
             id : this.$route.params.id,
             shareimg: require('../assets/img/2017101901.png'),
             erweima: require('../assets/img/1508642585.png')
-
           }
       },
     created() {
@@ -54,6 +54,7 @@
         that.inloading = true
         axios.get(Util.getContextPath()+'/api/v1/activity/merchant/twitter/'+that.id).then(function(response) {
           that.erweima = response.data.data;
+
           // console.log(response.data)
         })
       }

@@ -38,7 +38,7 @@
       </tr>
 
       <tr>
-        <td class="label"><span class="must">*</span>联系电话</td>
+        <td class="label">联系电话</td>
         <td class="content">
           <input class="input" placeholder="请输入联系电话" v-model="contactTel"/>
         </td>
@@ -60,7 +60,7 @@
       </tr>
 
       <tr>
-        <td class="label"><span class="must">*</span>营业执照</td>
+        <td class="label">营业执照</td>
         <td class="file">
           选择文件
           <!--<input type="button" @click="chooseImg()">-->
@@ -144,26 +144,39 @@
               this.showAlert('请输入密码')
               return ;
             }
+//            if(this.contactEmail == ''){
+//              this.showAlert('请输入邮箱')
+//              return ;
+//            }
             if(this.businessEntity == ''){
               this.showAlert('请输入法人')
               return ;
             }
-            if(!Util.checkMobileNum(this.contactTel)){
+            if(this.contactTel !=null && this.contactTel != '' && !Util.checkMobileNum(this.contactTel)){
               this.showAlert('请输入有效联系电话')
               return
             }
-            if(this.contactTel == ''){
-              this.showAlert('请输入联系电话')
-              return ;
-            }
+//            if(this.contactTel == ''){
+//              this.showAlert('请输入联系电话')
+//              return ;
+//            }
             if(this.merchantName == ''){
               this.showAlert('请输入企业名称')
               return ;
             }
-            if(this.businessLicence == ''){
-              this.showAlert('请上传营业执照')
-              return ;
-            }
+//            if(this.website == ''){
+//              this.showAlert('请输入企业网址')
+//              return ;
+//            }
+//
+//            if(this.merchantIntro == ''){
+//              this.showAlert('请输入企业简介')
+//              return ;
+//            }
+//            if(this.businessLicence == ''){ 
+//              this.showAlert('请上传营业执照')
+//              return ;
+//            }
             let vm = this;
             let param = new URLSearchParams();
             param.append("contactMobile", this.contactMobile);
@@ -183,6 +196,7 @@
               if(response.data.code == 0){
                 vm.noSub = true
                 vm.subState='已提交'
+                this.showAlert('提交成功')
               }else{
                 vm.showAlert(response.data.msg)
               }
