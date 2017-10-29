@@ -23,6 +23,15 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'shareindex',
+      component: share
+    },{
+      path: '/:id',
+      name: 'shareidindex',
+      component: share
+    },
+    {
+      path: '/index',
       name: 'index',
       component: index
     },

@@ -1,9 +1,10 @@
 <template>
 <!--首页-->
 	<div class="nostyle full" style="text-align: center;">
-    <!--<img id="bg_img" :src="shareimg" class="nostyle full" >
-    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">-->
-    <canvas id="canvas"></canvas>
+    <img id="bg_img" :src="shareimg" class="nostyle full" >
+    <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">
+    <!--<canvas id="canvas"></canvas>-->
+    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.56 + 'px'}">正在全力建设，敬请期待</p>
 	</div>
 </template>
 <script>
@@ -52,7 +53,8 @@
       getErweima () {
         let that = this
         that.inloading = true
-        axios.get(Util.getContextPath()+'/api/v1/activity/merchant/twitter/'+that.id).then(function(response) {
+        var id  = (that.id == '' || that.id == null) ?'21':that.id;
+        axios.get(Util.getContextPath()+'/api/v1/activity/merchant/twitter/'+id).then(function(response) {
           that.erweima = response.data.data;
 
           // console.log(response.data)
@@ -65,4 +67,5 @@
   .nostyle{margin: 0px;padding: 0px;}
   .full{height: 100%;width: 100%;}
   .erweima{width: 35%;position: absolute;left: 15rem;top:50rem;}
+  .bottom {width: 100%;position: absolute;text-align: right;padding-right: 15px;font-size: 1.5rem;color: white;font-style: normal;}
 </style>
