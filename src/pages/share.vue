@@ -4,7 +4,8 @@
     <img id="bg_img" :src="shareimg" class="nostyle full" >
     <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">
     <!--<canvas id="canvas"></canvas>-->
-    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.56 + 'px'}">正在全力建设，敬请期待</p>
+    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.55 + 'px'}">{{userNo}}</p>
+    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.59 + 'px'}">正在全力建设，敬请期待</p>
 	</div>
 </template>
 <script>
@@ -19,7 +20,8 @@
             userid : Util.getUrlParam('id') || '',
             id : this.$route.params.id,
             shareimg: require('../assets/img/2017101901.png'),
-            erweima: require('../assets/img/1508642585.png')
+            erweima: require('../assets/img/1508642585.png'),
+            userNo:''
           }
       },
     created() {
@@ -53,10 +55,10 @@
       getErweima () {
         let that = this
         that.inloading = true
-        var id  = (that.id == '' || that.id == null) ?'21':that.id;
+        var id  = (that.id == '' || that.id == null) ?'0':that.id;
         axios.get(Util.getContextPath()+'/api/v1/activity/merchant/twitter/'+id).then(function(response) {
-          that.erweima = response.data.data;
-
+          that.erweima = response.data.data.qrCode;
+          that.userNo = response.data.data.userNo;
           // console.log(response.data)
         })
       }
