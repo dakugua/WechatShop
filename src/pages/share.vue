@@ -5,7 +5,7 @@
     <img class="erweima" :src="erweima" v-bind:style="{ top: screenWidth*1.1 + 'px',left:screenWidth*0.326 + 'px' }">
     <!--<canvas id="canvas"></canvas>-->
     <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.55 + 'px'}">{{userNo}}</p>
-    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.59 + 'px'}">正在全力建设，敬请期待</p>
+    <p class="nostyle bottom" v-bind:style="{ top: screenWidth*1.59 + 'px'}">商户招商中，敬请入驻</p>
 	</div>
 </template>
 <script>
@@ -19,7 +19,7 @@
             fullHeight: document.documentElement.clientHeight,
             userid : Util.getUrlParam('id') || '',
             id : this.$route.params.id,
-            shareimg: require('../assets/img/2017101901.png'),
+            shareimg: require('../assets/img/2017101901.jpg'),
             erweima: require('../assets/img/1508642585.png'),
             userNo:''
           }

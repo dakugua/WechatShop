@@ -17,7 +17,7 @@ util.getUrlParams = function(){
   return theRequest;
 };
 util.getContextPath = function(){
-  return 'http://test.api.catoncar.com';
+  return 'http://api.catoncar.com';
   /*if(process.env.NODE_ENV !== 'production') return 'http://test.api.catoncar.com/api';
   var url = window.location.href;
   return url.substring(0, url.indexOf("/mobile") !== -1 ? url.indexOf("/mobile") : '' );*/

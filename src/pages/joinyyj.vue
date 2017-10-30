@@ -190,7 +190,8 @@
             param.append("businessLicence",this.businessLicence);
             param.append("merchantIntro", this.merchantIntro);
 
-            axios.post(Util.getContextPath()+'/api/v1/merchant/join/'+this.id,param).then(function(response) {
+            var id  = (vm.id == '' || vm.id == null) ?'':vm.id;
+            axios.post(Util.getContextPath()+'/api/v1/merchant/join/'+id,param).then(function(response) {
 //              that.erweima = response.data.data;
                console.log(response.data)
               if(response.data.code == 0){
