@@ -1,98 +1,173 @@
 <template>
 <!--首页-->
-	<div class="wrapper">
-    <table>
-      <tr>
-        <td class="label"><span class="must">*</span>手机号</td>
-        <td class="content">
-          <input class="input" placeholder="请输入手机号" v-model="contactMobile"/>
-        </td>
-      </tr>
+	<div class="joinyyj_body">
+    <p class="joinyyj_title">凯腾聚知奥聚辰欢迎您</p>
+    <div class="joinyyj_table_bg">
+      <table class="joinyyj_table">
+        <tr>
+          <td colspan="2" style="width: 100%;text-align: center;padding-top: 10px;padding-bottom: 10px;font-size: 1.6rem;">
+            商户注册
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入手机号(必填)" v-model="contactMobile"/>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="label"><span class="must">*</span>E-mail</td>
-        <td class="content">
-          <input class="input" placeholder="请输入E-mail" v-model="contactEmail"/>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入E-mail(必填)" v-model="contactEmail"/>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="label"><span class="must">*</span>密码</td>
-        <td class="content">
-          <input type="password" class="input" placeholder="请输入密码" v-model="password"/>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2">
+            <input type="password" class="joinyyj_input" placeholder="请输入密码(必填)" v-model="password"/>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="label"><span class="must">*</span>确认密码</td>
-        <td class="content">
-          <input type="password" class="input" placeholder="请输入确认密码" v-model="secondpassword"/>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2">
+            <input type="password" class="joinyyj_input" placeholder="请输入确认密码(必填)" v-model="secondpassword"/>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="label"><span class="must">*</span>法人</td>
-        <td class="content">
-          <input class="input" placeholder="请输入法人" v-model="businessEntity"/>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入法人(必填)" v-model="businessEntity"/>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="label">联系电话</td>
-        <td class="content">
-          <input class="input" placeholder="请输入联系电话" v-model="contactTel"/>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入法人联系电话(选填)" v-model="contactTel"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入统一社会信用代码(必填)" v-model="businessLicenceCode"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入企业名称(必填)" v-model="merchantName"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="请输入官方网址" v-model="website"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <textarea  class="joinyyj_input" placeholder="请输入企业简介" v-model="merchantIntro"></textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <!--<td class="label">营业执照</td>-->
+          <td class="file" colspan="2">
+            营业执照(选填)
+            <!--<input type="button" @click="chooseImg()">-->
+            <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="onFileChange" >
+          </td>
+        </tr>
+        <tr >
+          <td colspan="2" style="width: 80%;text-align: center;">
+            <img :src="dataUrl" class="joinyyj_img" style="width: 30%;" v-if="dataUrl"/>
+          </td>
+        </tr>
 
 
-      <tr>
-        <td class="label"><span class="must">*</span>统一社会信用代码</td>
-        <td class="content">
-          <input class="input" placeholder="请输入统一社会信用代码" v-model="businessLicenceCode"/>
-        </td>
-      </tr>
+        <!-- <tr>
+           <td class="label"><span class="must">*</span>手机号</td>
+           <td class="content">
+             <input class="input" placeholder="请输入手机号" v-model="contactMobile"/>
+           </td>
+         </tr>-->
 
-      <tr>
-        <td class="label"><span class="must">*</span>企业名称</td>
-        <td class="content">
-          <input class="input" placeholder="请输入企业名称" v-model="merchantName"/>
-        </td>
-      </tr>
+        <!-- <tr>
+           <td class="label"><span class="must">*</span>E-mail</td>
+           <td class="content">
+             <input class="input" placeholder="请输入E-mail" v-model="contactEmail"/>
+           </td>
+         </tr>-->
 
-      <tr>
-        <td class="label">营业执照</td>
-        <td class="file">
-          选择文件
-          <!--<input type="button" @click="chooseImg()">-->
-          <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="onFileChange" >
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" style="width: 100%;text-align: center">
-          <img :src="dataUrl" class="joinyyj_img" style="width: 30%;" v-if="dataUrl"/>
-        </td>
-      </tr>
+        <!-- <tr>
+           <td class="label"><span class="must">*</span>密码</td>
+           <td class="content">
+             <input type="password" class="input" placeholder="请输入密码" v-model="password"/>
+           </td>
+         </tr>-->
 
-      <tr>
-        <td class="label">官方网址</td>
-        <td class="content">
-          <input class="input" placeholder="请输入官方网址" v-model="website"/>
-        </td>
-      </tr>
+        <!--<tr>-->
+        <!--<td class="label"><span class="must">*</span>确认密码</td>-->
+        <!--<td class="content">-->
+        <!--<input type="password" class="input" placeholder="请输入确认密码" v-model="secondpassword"/>-->
+        <!--</td>-->
+        <!--</tr>-->
 
-      <tr>
-        <td class="label">企业简介</td>
-        <td class="content">
-          <textarea  class="input" placeholder="请输入企业简介" v-model="merchantIntro"></textarea>
-        </td>
-      </tr>
+        <!--<tr>-->
+        <!--<td class="label"><span class="must">*</span>法人</td>-->
+        <!--<td class="content">-->
+        <!--<input class="input" placeholder="请输入法人" v-model="businessEntity"/>-->
+        <!--</td>-->
+        <!--</tr>-->
 
-      <tr>
-        <td colspan="2" style="width: 100%;text-align: center">
-          <button class="joinbutton" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>
-        </td>
-      </tr>
-    </table>
+        <!--<tr>-->
+        <!--<td class="label">联系电话</td>-->
+        <!--<td class="content">-->
+        <!--<input class="input" placeholder="请输入联系电话" v-model="contactTel"/>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+
+        <!--<tr>-->
+        <!--<td class="label"><span class="must">*</span>统一社会信用代码</td>-->
+        <!--<td class="content">-->
+        <!--<input class="input" placeholder="请输入统一社会信用代码" v-model="businessLicenceCode"/>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+        <!--<tr>-->
+        <!--<td class="label"><span class="must">*</span>企业名称</td>-->
+        <!--<td class="content">-->
+        <!--<input class="input" placeholder="请输入企业名称" v-model="merchantName"/>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+
+
+        <!--<tr>-->
+        <!--<td class="label">官方网址</td>-->
+        <!--<td class="content">-->
+        <!--<input class="input" placeholder="请输入官方网址" v-model="website"/>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+        <!--<tr>-->
+        <!--<td class="label">企业简介</td>-->
+        <!--<td class="content">-->
+        <!--<textarea  class="input" placeholder="请输入企业简介" v-model="merchantIntro"></textarea>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+        <!--<tr>-->
+        <!--<td colspan="2" style="width: 100%;text-align: center">-->
+        <!--<button class="joinbutton" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>-->
+        <!--</td>-->
+        <!--</tr>-->
+      </table>
+      <hr class="joinyyj_hr">
+      <div style="text-align: center;padding:1.3rem;">
+        <button class="joinbutton" @click="uploaddata()" :disabled ="noSub">{{subState}}</button>
+      </div>
+    </div>
 	</div>
 </template>
 
@@ -132,6 +207,10 @@
                 this.showAlert('请输入有效手机号')
                 return
               }
+            if(this.contactEmail == ''){
+              this.showAlert('请输入邮箱')
+              return ;
+            }
             if(this.password != this.secondpassword){
               this.showAlert('两次密码输入不一致')
               return ;
@@ -144,22 +223,21 @@
               this.showAlert('请输入密码')
               return ;
             }
-            if(this.contactEmail == ''){
-              this.showAlert('请输入邮箱')
-              return ;
-            }
+
             if(this.businessEntity == ''){
               this.showAlert('请输入法人')
               return ;
             }
-            if(this.contactTel !=null && this.contactTel != '' && !Util.checkMobileNum(this.contactTel)){
-              this.showAlert('请输入有效联系电话')
-              return
-            }
-//            if(this.contactTel == ''){
-//              this.showAlert('请输入联系电话')
-//              return ;
+
+
+//            if(this.contactTel !=null && this.contactTel != '' && !Util.checkMobileNum(this.contactTel)){
+//              this.showAlert('请输入有效联系电话')
+//              return
 //            }
+            if(this.businessLicenceCode == ''){
+              this.showAlert('请输入统一社会信用代码')
+              return ;
+            }
             if(this.merchantName == ''){
               this.showAlert('请输入企业名称')
               return ;
@@ -195,9 +273,13 @@
 //              that.erweima = response.data.data;
                console.log(response.data)
               if(response.data.code == 0){
+                //http://boss.catoncar.com/index.html
                 vm.noSub = true
                 vm.subState='已提交'
-                vm.showAlert('提交成功')
+                vm.showAlert('添加用户成功')
+                setTimeout(function(){
+                  location.href='http://boss.catoncar.com/index.html'
+                },1000);
               }else{
                 vm.showAlert(response.data.msg)
               }
@@ -337,30 +419,47 @@
 </script>
 <style lang="css">
   @import "../assets/css/postbirdAlertBox.css";
-  table{width: 100%;margin-top: 3rem;}
+  /*table{width: 100%;margin-top: 3rem;}*/
   .nomargin{margin: 0px;padding: 0px;}
+
+  .joinyyj_body{width: 100%;height: 100%;overflow: hidden;padding-left: 1rem;padding-right: 1rem;background: #d2d6de;padding-bottom: 2rem;}
+
+  .joinyyj_title{width: 100%;font-size: 2.2rem;padding-top: 1.3rem;text-align: center;}
+
+  .joinyyj_table_bg{background: white;}
+  .joinyyj_table{width: 100%;margin-top: 1rem;}
+  /*.joinyyj_table tr{padding: 5px;}*/
+  .joinyyj_table td{text-align: center;padding-top: 5px;padding-bottom: 5px;}
+
+  .joinyyj_input{width: 93%;margin: auto;padding-top: 3px;padding-bottom: 3px;}
+
   .label{width: 35%;text-align: right;font-size: 1.3rem;padding-right:15px;padding-top: 5px;padding-bottom: 5px; }
   .label .must{color: red;margin-right: 8px;margin-top: 10px;}
   .content{width: 65%;padding-top: 5px;padding-bottom: 5px;}
 
   .content .input{width: 100%;border: solid 1px grey;}
 
+
+
   .joinyyj_img{width: 30%;border-radius: 0.3rem;}
 
-  .joinbutton{width: 50%;margin: auto;background-color: #4CAF50;border: none;color: white;padding: 1rem;text-align: center;text-decoration: none;display: inline-block;font-size: 1.3rem;}
+  .joinyyj_hr{ border: 0;width: 93%;margin: auto;height: 1px;background: #b2b2b2;}
+
+  .joinbutton{width: 30%;background-color: #3c8dbc;border: none;color: white;padding: 0.8rem;text-align: center;text-decoration: none;display: inline-block;font-size: 1.3rem;}
   .file {
     position: relative;
     display: inline-block;
-    background: #D0EEFF;
+    background: #3c8dbc;
     border: 1px solid #99D3F5;
     border-radius: 4px;
     padding: 4px 12px;
     overflow: hidden;
-    color: #1E88C7;
+    color: white;
     text-decoration: none;
     text-indent: 0;
     line-height: 20px;
-    width: 80%;
+    left: 3.5%;
+    width: 93%;
   }
   .file input {
     position: absolute;
