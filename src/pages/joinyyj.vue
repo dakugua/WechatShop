@@ -10,69 +10,117 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入手机号(必填)" v-model="contactMobile"/>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>手机号</span>
           </td>
         </tr>
-
         <tr>
           <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入E-mail(必填)" v-model="contactEmail"/>
+            <!-- 请输入手机号(必填) -->
+            <input class="joinyyj_input" placeholder="建议填写企业负责人或电商专员手机" v-model="contactMobile"/>
           </td>
         </tr>
-
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>E-mail</span>
+          </td>
+        </tr>
         <tr>
           <td colspan="2">
-            <input type="password" class="joinyyj_input" placeholder="请输入密码(必填)" v-model="password"/>
+            <!-- 请输入E-mail(必填) -->
+            <input class="joinyyj_input" placeholder="建议填写企业或企业负责人邮箱" v-model="contactEmail"/>
           </td>
         </tr>
-
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>密码</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <!-- 请输入密码(必填) -->
+            <input type="password" class="joinyyj_input" placeholder="尽量使用字母数字组和密码，不少于6个字符" v-model="password"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>确认密码</span>
+          </td>
+        </tr>
         <tr>
           <td colspan="2">
             <input type="password" class="joinyyj_input" placeholder="请输入确认密码(必填)" v-model="secondpassword"/>
           </td>
         </tr>
-
         <tr>
-          <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入法人(必填)" v-model="businessEntity"/>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>法人</span>
           </td>
         </tr>
-
         <tr>
           <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入法人联系电话(选填)" v-model="contactTel"/>
+            <!-- 请输入法人(必填) -->
+            <input class="joinyyj_input" placeholder="营业执照上法人或企业事业部负责人" v-model="businessEntity"/>
           </td>
         </tr>
-
         <tr>
-          <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入统一社会信用代码(必填)" v-model="businessLicenceCode"/>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span>法人联系电话</span>
           </td>
         </tr>
-
         <tr>
           <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入企业名称(必填)" v-model="merchantName"/>
+            <!-- 请输入法人联系电话(选填) -->
+            <input class="joinyyj_input" placeholder="企业负责人电话或办公电话" v-model="contactTel"/>
           </td>
         </tr>
-
         <tr>
-          <td colspan="2">
-            <input class="joinyyj_input" placeholder="请输入官方网址" v-model="website"/>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>统一社会信用代码</span>
           </td>
         </tr>
-
         <tr>
           <td colspan="2">
-            <textarea  class="joinyyj_input" placeholder="请输入企业简介" v-model="merchantIntro"></textarea>
+            <!-- 请输入统一社会信用代码(必填) -->
+            <input class="joinyyj_input" placeholder="营业执照上代码" v-model="businessLicenceCode"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span><span class="must">*</span>企业名称</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <!-- 请输入企业名称(必填) -->
+            <input class="joinyyj_input" placeholder="和营业执照一致" v-model="merchantName"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span>官方网址</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input class="joinyyj_input" placeholder="没有时注明无" v-model="website"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"  style="padding-left: 3.5%;text-align: left;">
+            <span>企业简介</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <textarea  class="joinyyj_input" placeholder="可登陆后再完善" v-model="merchantIntro"></textarea>
           </td>
         </tr>
 
         <tr>
           <!--<td class="label">营业执照</td>-->
           <td class="file" colspan="2">
-            营业执照(选填)
+            营业执照(可登录后再上传)
             <!--<input type="button" @click="chooseImg()">-->
             <input type="file" accept="image/jpeg,image/jpg,image/png" capture="camera" @change="onFileChange" >
           </td>
@@ -429,12 +477,12 @@
   .joinyyj_table_bg{background: white;}
   .joinyyj_table{width: 100%;margin-top: 1rem;}
   /*.joinyyj_table tr{padding: 5px;}*/
-  .joinyyj_table td{text-align: center;padding-top: 5px;padding-bottom: 5px;}
+  .joinyyj_table td{text-align: center;}
 
   .joinyyj_input{width: 93%;margin: auto;padding-top: 3px;padding-bottom: 3px;}
 
   .label{width: 35%;text-align: right;font-size: 1.3rem;padding-right:15px;padding-top: 5px;padding-bottom: 5px; }
-  .label .must{color: red;margin-right: 8px;margin-top: 10px;}
+  .must{color: red;margin-right: 5px;}
   .content{width: 65%;padding-top: 5px;padding-bottom: 5px;}
 
   .content .input{width: 100%;border: solid 1px grey;}
